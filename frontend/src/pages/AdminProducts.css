@@ -1,0 +1,111 @@
+.admin-products {
+  padding: 2rem 0;
+  min-height: calc(100vh - 200px);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.page-header h1 {
+  color: #2c3e50;
+  margin: 0;
+}
+
+.products-table {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 1rem;
+  border-bottom: 2px solid #ddd;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+td.low-stock {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+td button {
+  margin-right: 0.5rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-content h2 {
+  margin: 0 0 1.5rem 0;
+  color: #2c3e50;
+}
+
+.modal-content textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.modal-content select {
+  background-color: white;
+  cursor: pointer;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .products-table {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 600px;
+  }
+}
