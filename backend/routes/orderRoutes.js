@@ -9,12 +9,13 @@ const {
   updateOrderStatus,
 } = require('../controllers/orderController');
 const { protect, admin } = require('../middleware/auth');
+const { transactionLimiter } = require('../middleware/rateLimiter');
 
-router.post('/', protect, createOrder);
+router.post('/', protect, transactionLimiter, createOrder);
 router.get('/myorders', protect, getUserOrders);
 router.get('/all', protect, admin, getAllOrders);
 router.get('/:id', protect, getOrderById);
-router.put('/:id/pay', protect, updateOrderToPaid);
+router.put('/:id/pay', protect, transactionLimiter, updateOrderToPaid);
 router.put('/:id/status', protect, admin, updateOrderStatus);
 
 module.exports = router;

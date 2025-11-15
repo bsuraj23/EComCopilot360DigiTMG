@@ -8,11 +8,12 @@ const {
   clearCart,
 } = require('../controllers/cartController');
 const { protect } = require('../middleware/auth');
+const { transactionLimiter } = require('../middleware/rateLimiter');
 
 router.get('/', protect, getCart);
-router.post('/', protect, addToCart);
-router.put('/', protect, updateCartItem);
-router.delete('/:productId', protect, removeFromCart);
-router.delete('/', protect, clearCart);
+router.post('/', protect, transactionLimiter, addToCart);
+router.put('/', protect, transactionLimiter, updateCartItem);
+router.delete('/:productId', protect, transactionLimiter, removeFromCart);
+router.delete('/', protect, transactionLimiter, clearCart);
 
 module.exports = router;
