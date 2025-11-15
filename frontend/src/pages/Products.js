@@ -13,24 +13,24 @@ const Products = () => {
   const categories = ['Electronics', 'Clothing', 'Books', 'Home & Kitchen', 'Sports', 'Beauty', 'Toys', 'Other'];
 
   useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const params = {};
+        if (search) params.search = search;
+        if (category) params.category = category;
+        
+        const data = await productService.getProducts(params);
+        setProducts(data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || 'Failed to fetch products');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchProducts();
   }, [search, category]);
-
-  const fetchProducts = async () => {
-    try {
-      setLoading(true);
-      const params = {};
-      if (search) params.search = search;
-      if (category) params.category = category;
-      
-      const data = await productService.getProducts(params);
-      setProducts(data.data);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to fetch products');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="products-page">

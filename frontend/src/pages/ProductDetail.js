@@ -14,20 +14,20 @@ const ProductDetail = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const data = await productService.getProduct(id);
+        setProduct(data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || 'Failed to fetch product');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchProduct();
   }, [id]);
-
-  const fetchProduct = async () => {
-    try {
-      setLoading(true);
-      const data = await productService.getProduct(id);
-      setProduct(data.data);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to fetch product');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleAddToCart = () => {
     addToCart(product, quantity);
